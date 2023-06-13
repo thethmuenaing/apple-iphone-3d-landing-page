@@ -12,7 +12,6 @@ import React, { useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import gsap from "gsap";
 import { useThree } from "@react-three/fiber";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function Model(props) {
 	const { nodes, materials } = useGLTF("/scene.gltf");
@@ -31,11 +30,7 @@ export function Model(props) {
 			},
 		});
 
-		t1.fromTo(camera.position, { y: 2 }, { y: 0 }).fromTo(
-			camera.position,
-			{ x: 1 },
-			{ x: 0 }
-		);
+		t1.fromTo(camera.position, { y: 2 }, { y: 0 });
 	}, [camera.position]);
 
 	return (
