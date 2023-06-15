@@ -2,6 +2,7 @@ import "./App.css";
 import DesignSection from "./sections/DesignSection";
 import DisplaySection from "./sections/DisplaySection";
 import HeroSection from "./sections/HeroSection";
+import ProcessorSection from "./sections/ProcessorSection";
 // import PhoneModel from "./sections/PhoneModel";
 import Quote from "./sections/Quote";
 import { GlobalStyle } from "./styles/GlobalStyle";
@@ -15,6 +16,7 @@ function App() {
 			<HeroSection />
 			<DesignSection />
 			<DisplaySection />
+			<ProcessorSection />
 		</>
 	);
 }
