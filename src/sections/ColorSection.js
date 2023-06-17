@@ -1,6 +1,10 @@
+import { useGLTF } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Environment } from "@react-three/drei";
 import { gsap } from "gsap";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { Suspense, useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
+import { Model2 } from "../components/Scene2";
 
 const Section = styled.section`
 	width: 100vw;
@@ -47,6 +51,8 @@ const ColorSection = () => {
 	const leftRef = useRef(null);
 	const textRef = useRef(null);
 
+	const { materials } = useGLTF("/scene.gltf");
+
 	useLayoutEffect(() => {
 		let Elem = sectionRef.current;
 		let rightElem = rightRef.current;
@@ -54,6 +60,8 @@ const ColorSection = () => {
 		let textElem = textRef.current;
 
 		let updateColor = (color, text, rgbColor) => {
+			materials.Body.color.set(color);
+
 			textElem.innerText = text;
 			textElem.style.color = color;
 
@@ -121,12 +129,23 @@ const ColorSection = () => {
 			});
 
 		return () => {};
-	}, []);
+	}, [materials.Body.color]);
 	return (
 		<Section ref={sectionRef}>
 			<Left ref={leftRef} />
-			<Center ref={textRef}>Sierra Blue</Center>
-			<Right ref={rightRef} />
+			<Center ref={textRef} />
+			<Right ref={rightRef}>
+				<Canvas camera={{ fov: 6.5 }}>
+					<ambientLight intensity={1.25} />
+					<directionalLight intensity={[0.2]} />
+					<Suspense fallback={null}>
+						<Model2 />
+					</Suspense>
+
+					<Environment preset="night" />
+					{/* <OrbitControls /> */}
+				</Canvas>
+			</Right>
 		</Section>
 	);
 };

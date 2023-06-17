@@ -2,7 +2,7 @@ import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense } from "react";
 import styled from "styled-components";
-import { Model } from "../assets/3D-Model/Scene";
+import Model from "../components/Scene";
 
 const Container = styled.div`
 	width: 100vw;
