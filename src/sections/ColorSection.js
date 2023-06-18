@@ -2,9 +2,16 @@ import { useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import { gsap } from "gsap";
-import React, { Suspense, useLayoutEffect, useRef } from "react";
+import React, {
+	Suspense,
+	useContext,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+} from "react";
 import styled from "styled-components";
 import { Model2 } from "../components/Scene2";
+import { ColorContext } from "../context/ColorContext";
 
 const Section = styled.section`
 	width: 100vw;
@@ -53,20 +60,31 @@ const ColorSection = () => {
 
 	const { materials } = useGLTF("/scene.gltf");
 
-	useLayoutEffect(() => {
-		let Elem = sectionRef.current;
+	const { currentColor, changeColorContext } = useContext(ColorContext);
+
+	useEffect(() => {
 		let rightElem = rightRef.current;
 		let leftElem = leftRef.current;
 		let textElem = textRef.current;
 
+		textElem.innerText = currentColor.text;
+		textElem.style.color = currentColor.color;
+
+		rightElem.style.backgroundColor = `rgba(${currentColor.rgbColor}, 0.4)`;
+		leftElem.style.backgroundColor = `rgba(${currentColor.rgbColor}, 0.8)`;
+	}, [currentColor.color, currentColor.rgbColor, currentColor.text]);
+	useLayoutEffect(() => {
+		let Elem = sectionRef.current;
+
 		let updateColor = (color, text, rgbColor) => {
-			materials.Body.color.set(color);
+			// materials.Body.color.set(color);
 
-			textElem.innerText = text;
-			textElem.style.color = color;
-
-			rightElem.style.backgroundColor = `rgba(${rgbColor}, 0.4)`;
-			leftElem.style.backgroundColor = `rgba(${rgbColor}, 0.8)`;
+			const colorObj = {
+				color,
+				text,
+				rgbColor,
+			};
+			changeColorContext(colorObj);
 		};
 
 		// pin the section
@@ -128,8 +146,16 @@ const ColorSection = () => {
 				onReverseCompleteParams: ["#215E7C", "Blue", "33, 94, 124"],
 			});
 
-		return () => {};
-	}, [materials.Body.color]);
+		return () => {
+			if (t2) t2.kill();
+		};
+	}, [
+		changeColorContext,
+		currentColor.color,
+		currentColor.rgbColor,
+		currentColor.text,
+		materials.Body.color,
+	]);
 	return (
 		<Section ref={sectionRef}>
 			<Left ref={leftRef} />
