@@ -8,6 +8,7 @@ import ProcessorSection from "./sections/ProcessorSection";
 import PhoneModel from "./sections/PhoneModel";
 import Quote from "./sections/Quote";
 import { GlobalStyle } from "./styles/GlobalStyle";
+import CameraSection from "./sections/CameraSection";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 			<ProcessorSection />
 			<BatterySection />
 			<ColorSection />
+			<CameraSection />
 		</>
 	);
 }
