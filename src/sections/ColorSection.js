@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+// import { useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import { gsap } from "gsap";
@@ -30,6 +30,10 @@ const Left = styled.div`
 	display: flex;
 	background-color: rgba(155, 181, 206, 0.8);
 	position: relative;
+
+	@media screen and (max-width: 48em) {
+		width: 100%;
+	}
 `;
 const Right = styled.div`
 	width: 50%;
@@ -38,6 +42,10 @@ const Right = styled.div`
 	display: flex;
 	background-color: rgba(155, 181, 206, 0.4);
 	position: relative;
+
+	@media screen and (max-width: 48em) {
+		display: none;
+	}
 `;
 const Center = styled.div`
 	width: 100%;
@@ -50,6 +58,11 @@ const Center = styled.div`
 	text-transform: uppercase;
 
 	filter: brightness(0.85);
+
+	@media screen and (max-width: 48em) {
+		top: 2rem;
+		transform: translate(-50%, 0%) rotate(-0deg);
+	}
 `;
 
 const ColorSection = () => {
@@ -58,7 +71,7 @@ const ColorSection = () => {
 	const leftRef = useRef(null);
 	const textRef = useRef(null);
 
-	const { materials } = useGLTF("/scene.gltf");
+	// const { materials } = useGLTF("/scene.gltf");
 
 	const { currentColor, changeColorContext } = useContext(ColorContext);
 
@@ -149,13 +162,7 @@ const ColorSection = () => {
 		return () => {
 			if (t2) t2.kill();
 		};
-	}, [
-		changeColorContext,
-		currentColor.color,
-		currentColor.rgbColor,
-		currentColor.text,
-		materials.Body.color,
-	]);
+	}, []);
 	return (
 		<Section ref={sectionRef}>
 			<Left ref={leftRef} />

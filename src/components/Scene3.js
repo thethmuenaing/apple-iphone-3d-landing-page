@@ -23,7 +23,12 @@ export function Model3(props) {
 
 		camera.position.set(-0.1, 0.4, 5);
 		materials.Body.color.set("#9BB5CE");
-	}, [camera.position, materials.Body.color]);
+
+		if (window.matchMedia("(max-width: 48em)").matches) {
+			camera.fov = 18;
+			camera.updateProjectionMatrix();
+		}
+	}, [camera, materials.Body.color]);
 
 	return (
 		<group {...props} dispose={null}>
