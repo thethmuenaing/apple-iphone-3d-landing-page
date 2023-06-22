@@ -1,6 +1,6 @@
 // import { useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+// import { Environment } from "@react-three/drei";
 import { gsap } from "gsap";
 import React, {
 	Suspense,
@@ -10,7 +10,7 @@ import React, {
 	useRef,
 } from "react";
 import styled from "styled-components";
-import { Model2 } from "../components/Scene2";
+import Model2 from "../components/Scene2";
 import { ColorContext } from "../context/ColorContext";
 
 const Section = styled.section`
@@ -175,7 +175,7 @@ const ColorSection = () => {
 						<Model2 />
 					</Suspense>
 
-					<Environment preset="night" />
+					{/* <Environment preset="night" /> */}
 					{/* <OrbitControls /> */}
 				</Canvas>
 			</Right>

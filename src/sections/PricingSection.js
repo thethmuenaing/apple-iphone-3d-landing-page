@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
-import { Model3 } from "../components/Scene3";
-import { AdaptiveDpr, AdaptiveEvents, Environment } from "@react-three/drei";
+import Model3 from "../components/Scene3";
+import { AdaptiveDpr, AdaptiveEvents } from "@react-three/drei";
 import { OrbitControls } from "@react-three/drei";
 import { useRef } from "react";
 import { useContext } from "react";
@@ -165,7 +165,7 @@ const PricingSection = () => {
 							<Model3 />
 						</Suspense>
 
-						<Environment preset="night" />
+						{/* <Environment preset="night" /> */}
 						<AdaptiveDpr pixelated />
 						<AdaptiveEvents />
 						<OrbitControls enableZoom={false} />
